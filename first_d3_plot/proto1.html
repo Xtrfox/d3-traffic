@@ -1,65 +1,235 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <script type="text/javascript" src="d3/d3.js"></script>
-    <style>
-        
-    </style>
-    <script>
-    function draw(data) {
-		station = data;
-		var s = [4, 4, 4, 4, 4, 32, 1, 3];
-		var a = data.filter(function (d,i){return d['#lineID'] == 4; });
-		d3.select("body").append("svg")
-			.selectAll("circle")
-			.data(a)
-			.enter().append("circle")
-		//var svg = d3.select("body")
-  			//	.append("svg")
-  			 //	.attr("width",width)
-  			 //	.attr("height",height);
-		//var c = svg.selectAll(".shapes")
-				//.data(station).enter()
-				//.append("circle")
-				//.filter(function(d){ return (d['#lineID'] == 4);})
-				.attr("cx", function(d, i) {return (i+1) * 25;})
-				//.attr("cx", 55)
-			.attr("cy", 60)
-			//.attr({r: function(d,i){return d*10;}, fill: 'red'});
-			.attr("r", 10);
-				//.attr("fill", "red");
-        //var svg = d3.select("body").append("svg");
-		//var c = svg.selectAll(".shapes")
-			//.data(data).enter();
-		//c.append("circle")
-			//.filter(function(d){ return d['statusID'] == 4;})
-			//.attr("cx", function(d, i) {return (i+1) * 25;})
-			//.attr("cy", 10)
-			//.attr("r", 10)
-    }
-    </script>
-</head>
-<body>
-    <script>
-		var station;
-			d3.csv("data/collated_status_20140725.csv", function(data1){
-				d3.csv("data/line_stations.csv", function draw(data2) {
-					var margin = 50,
-						width = 6000,
-						height = 1300;
-					var a = data2.filter(function (d,i){return d['#lineID'] == 4; });
-					d3.select("body").append("svg")
+  <title>Traffic</title>
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script>
+
+
+
+function lineNames(data) {
+  var lineLabels = d3.select("#line-names");
+
+
+  var line_divs = lineLabels.selectAll("div")
+    .data(data.filter(function(d){ return d.lineID == 4;}))
+    .enter()
+    .append("div")
+      .attr("class", function(d) { return "line-row" })
+      .attr("id", function(d,i) { return "line-row-" + i});
+	  
+
+  line_divs.append("div")
+    .attr("id", function(d,i) {return "line-square-" +i})
+    .attr("class", function(d,i) {return "line-square line-" +i +""});
+
+  line_divs.append("div")
+    .text( function(d) {
+         return d.stationName;
+      })
+    .attr('class', function(d) { return "line-label"});
+	
+	var margin = 10,
+		width = 6000,
+		height = 500;
+		
+	     
+						d3.select("body").append("svg")
 						.attr("width", width)
 						.attr("height", height)
 						.selectAll("circle")
-						.data(a)
+						.data(data.filter(function(d){ return d.lineID == 4;}))
 						.enter().append("circle")
+						.attr("class", function(d,i) {return "line-square line-" +i +""})
 						.attr("cx", function(d, i) {return (i+1) * 55;}) // 55 distance between circles para hindi dikit dikit
 						.attr("cy", 160)
 						.attr("r", 20);
-				});
-			});
-    </script>
+						
+}
+function ready() {
+  d3.csv("line_stations.csv", lineNames);
+}
+// d3.csv("data/collated_status_20140725.csv", function(data){
+//         console.log( data.filter(function(d){ return d.lineID == 4;}))
+//         });
+
+$(document).ready(ready);
+
+
+
+</script>
+
+<style>
+$font-family-sans-serif: 'Bariol', sans-serif;
+
+// Base
+$border-radius-base: 0;
+$body-bg: #f5f5f5;
+$text-color: #565a5c;
+
+// Panels
+$panel-bg: #fff;
+
+$mb-orange: #f49724;
+$fb-blue: #3b5998;
+
+$font-family-price: 'Georgia', serif;
+
+@font-face {
+  font-family: 'Bariol';
+  src: asset-url('bariol_regular-webfont.eot');
+  src: asset-url('bariol_regular-webfont.eot?#iefix') format('embedded-opentype'),
+       asset-url('bariol_regular-webfont.woff') format('woff'),
+       asset-url('bariol_regular-webfont.ttf') format('truetype'),
+       asset-url('bariol_regular-webfont.svg#bariol_regularregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+h1 {
+  font-size: 12px;
+}
+
+.line-square {
+  float:left;
+  width:15px;
+  height:15px;
+  margin-right:8px;
+  margin-top:2px;
+  background:#222222;
+  border-radius: 8px;
+  border-width: 2px;
+  border-color:#222222;
+  border-style: solid
+}
+
+.line-row {
+  padding: 5.5px;
+}
+
+line-0 {
+  fill:#e25b83;
+  background:#e25b83;
+  border-color:#e25b83;
+}
+.line-1 {
+  fill:#ec7735;
+  background:#ec7735;
+  border-color:#ec7735;
+}
+.line-2 {
+	fill:#70c49b;
+  background:#70c49b;
+  border-color:#70c49b;
+}
+.line-3 {
+fill:#f6c14f;
+  background:#f6c14f;
+  border-color:#f6c14f;
+}
+.line-4 {
+fill:#8d5641;
+  background:#8d5641;
+  border-color:#8d5641;
+}
+.line-5 {
+fill:#2e91cb;
+  background:#2e91cb;
+  border-color:#2e91cb;
+}
+.line-6 {
+fill:#53c4c8;
+  background:#53c4c8;
+  border-color:#53c4c8;
+}
+.line-7 {
+fill:#b193c0;
+  background:#b193c0;
+  border-color:#b193c0;
+}
+.line-8 {
+fill:#c6c6c0;
+  background:#c6c6c0;
+  border-color:#c6c6c0;
+}
+
+
+.line-9 {
+	fill:#f6c14f;
+  background:#f6c14f;
+  border-color:#f6c14f;
+}
+.line-10 {
+fill:#8d5641;
+  background:#8d5641;
+  border-color:#8d5641;
+}
+.line-11 {
+fill:#2e91cb;
+  background:#2e91cb;
+  border-color:#2e91cb;
+}
+.line-12 {
+fill:#53c4c8;
+  background:#53c4c8;
+  border-color:#53c4c8;
+}
+.line-13 {
+fill:#b193c0;
+  background:#b193c0;
+  border-color:#b193c0;
+}
+.line-14 {
+fill:#c6c6c0;
+  background:#c6c6c0;
+  border-color:#c6c6c0;
+}
+
+.line-15 {
+fill:#2e91cb;
+  background:#2e91cb;
+  border-color:#2e91cb;
+}
+.line-16 {
+fill:#53c4c8;
+  background:#53c4c8;
+  border-color:#53c4c8;
+}
+.line-17 {
+fill:#b193c0;
+  background:#b193c0;
+  border-color:#b193c0;
+}
+.line-18 {
+fill:#c6c6c0;
+  background:#c6c6c0;
+  border-color:#c6c6c0;
+}
+</style>
+
+</head>
+<body>
+  <div class= "container">
+    <h1>Manilia Traffic</h1>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="chart"></div>
+      </div>
+      <div class="col-md-3">
+        <div class="c-panel-label">
+          Filter
+        </div>
+        <div class="c-panel-sub-label">
+          Click to hide/show line
+        </div>
+      <div class="c-panel-body">
+        <div class= "line-names" id="line-names"></div>
+      </div>
+    </div>
+  </div>
 </body>
+
 </html>

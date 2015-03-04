@@ -18,7 +18,25 @@ function lineNames(data) {
          return d.stationName;
       })
     .attr('class', function(d) { return "line-label"});
+
+  var margin = 10,
+    width = 6000,
+    height = 500;
+
+
+    d3.select("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .selectAll("circle")
+    .data(data.filter(function(d){ return d.lineID == 4;}))
+    .enter().append("circle")
+    .attr("class", function(d,i) {return "line-square line-" +i +""})
+    .attr("cx", function(d, i) {return (i+1) * 55;}) // 55 distance between circles para hindi dikit dikit
+    .attr("cy", 160)
+    .attr("r", 20);
 }
+
+
 function ready() {
   d3.csv("assets/line_stations.csv", lineNames);
 }

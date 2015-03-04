@@ -5382,3 +5382,51 @@ Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-02-28 22:28:10
 
 
 Started GET "/assets/line_stations.csv" for 127.0.0.1 at 2015-02-28 22:28:10 +0800
+
+
+Started GET "/" for 127.0.0.1 at 2015-03-04 17:05:27 +0800
+Processing by ChartController#index as HTML
+  Rendered chart/index.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 267ms (Views: 234.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/chart.css?body=1" for 127.0.0.1 at 2015-03-04 17:05:27 +0800
+
+
+Started GET "/assets/common.css?body=1" for 127.0.0.1 at 2015-03-04 17:05:27 +0800
+
+
+Started GET "/assets/d3.min.js?body=1" for 127.0.0.1 at 2015-03-04 17:05:27 +0800
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-04 17:05:27 +0800
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-04 17:05:27 +0800
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-04 17:05:27 +0800
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2015-03-04 17:05:27 +0800
+
+
+Started GET "/assets/d3.slider.js?body=1" for 127.0.0.1 at 2015-03-04 17:05:27 +0800
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-04 17:05:27 +0800
+
+
+Started GET "/assets/chart.js?body=1" for 127.0.0.1 at 2015-03-04 17:05:27 +0800
+
+
+Started GET "/assets/main.js?body=1" for 127.0.0.1 at 2015-03-04 17:05:27 +0800
+
+
+Started GET "/assets/slider.js?body=1" for 127.0.0.1 at 2015-03-04 17:05:27 +0800
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-04 17:05:27 +0800
+
+
+Started GET "/assets/line_stations.csv" for 127.0.0.1 at 2015-03-04 17:05:28 +0800

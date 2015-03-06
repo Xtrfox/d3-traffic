@@ -31,9 +31,15 @@ function lineNames(data) {
     .data(data.filter(function(d){ return d.lineID == 4;}))
     .enter().append("circle")
     .attr("class", function(d,i) {return "line-square line-" +i +""})
-    .attr("cx", function(d, i) {return (i+1) * 55;}) // 55 distance between circles para hindi dikit dikit
+    .attr("cx", function(d, i) {
+			return (i+1) * 90;
+		})
     .attr("cy", 160)
-    .attr("r", 20);
+    .attr("r", function(d, i){
+			if (d.statusN == 0) {return 20}
+			else if (d.statusN == 1) {return 40}
+			else {return 60};
+		});
 }
 
 

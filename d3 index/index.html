@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Traffic</title>
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script>
+
+
+
+function lineNames(data) {
+  var lineLabels = d3.select("#line-names");
+
+
+  var line_divs = lineLabels.selectAll("div")
+    .data(data.filter(function(d){ return d.lineID == 4;}))
+    .enter()
+    .append("div")
+      .attr("class", function(d) { return "line-row" })
+      .attr("id", function(d,i) { return "line-row-" + i});
+	  
+
+  line_divs.append("div")
+    .attr("id", function(d,i) {return "line-square-" +i})
+    .attr("class", function(d,i) {return "line-square line-" +i +""});
+
+  line_divs.append("div")
+    .text( function(d) {
+         return d.stationName;
+      })
+    .attr('class', function(d) { return "line-label"});
+							
+
+}
+
+function drawCircles(data){
+	var margin = 10,
+		width = 6000,
+		height = 1000;
+		
+	var nodes = [];
+	var links = [];
+		
+	var filtered = data.filter(function(d) {
+			return (d.lineID == 4 && d.hour == 00 && d.qtr == 1);
+		});
+		
+	var temp = filtered.length;
+	var count = 0;
+	while (temp != 0){
+		temp = Math.floor(temp / 2);
+		count++;
+	}
+	
+	console.log(count);
+	
+	var right = true;
+	var cx = 0;
+	var cy = 160;
+	var tempi = 0;
+		
+	for (var i = 0; i < filtered.length; i++){
+		if (right == true){
+			if (tempi < count){
+				cx = cx + 150;
+				nodes.push({"station": filtered[i]['stationID'], "size": filtered[i]['statusN'], "cx": cx, "cy": cy});
+				tempi++;
+			}
+			else{
+				if (tempi == count){
+					cy = cy + 100;
+					nodes.push({"station": filtered[i]['stationID'], "size": filtered[i]['statusN'], "cx": cx, "cy": cy});
+					right = false;
+					tempi = 1;
+				}
+				else{}
+			}
+		}
+		else{
+			if (tempi < count){
+				cx = cx - 150;
+				nodes.push({"station": filtered[i]['stationID'], "size": filtered[i]['statusN'], "cx": cx, "cy": cy});
+				tempi++;
+			}
+			else{
+				if (tempi == count){
+					cy = cy + 100;
+					nodes.push({"station": filtered[i]['stationID'], "size": filtered[i]['statusN'], "cx": cx, "cy": cy});
+					right = true;
+					tempi = 1;
+				}
+				else{}
+			}
+		}
+	}
+		
+	for (var j = 0; j < nodes.length - 1; j++){
+		links.push({"source": j, "target": j+1});
+	}
+	
+	
+	var svg = d3.select('body').append('svg')
+		.attr("width", width)
+		.attr("height", height);
+	
+	var force = d3.layout.force()
+    .size([width, height])
+    .nodes(nodes)
+    .links(links);
+
+	force.linkDistance(250)
+	force.friction(0.9)
+	force.charge(-30)
+    force.gravity(0.1);
+		
+	var link = svg.selectAll('.link')
+    .data(links)
+    .enter().append('line')
+	.attr("stroke", "black")
+	.attr("stroke-width", 2);
+
+
+	
+	var node = svg.selectAll('.node')
+    .data(nodes)
+    .enter().append('circle')
+    .attr('class', function(d,i) {return "line-square line-" +i +""});
+
+	force.on('tick', function() {
+		// if 19 (blank) mod 3 and not equal to 1 >= 4 three or more rows
+		// 19, 5 circles each row (3) + 4 circles last row (1)
+		
+		
+	
+	  node.attr("r", function(d, i){
+			if (d.size == 0) {return 20}
+			else if (d.size == 1) {return 40}
+			else {return 60};
+		})
+        .attr("cx", function(d) {
+			return d.cx;
+		})
+		.attr("cy", function(d){
+			return d.cy;
+		});
+		
+		link.attr("x1", function(d) { return d.source.cx; })
+      .attr("y1", function(d) { return d.source.cy; })
+      .attr("x2", function(d) { return d.target.cx; })
+      .attr("y2", function(d) { return d.target.cy; });
+
+
+});
+
+force.start();
+
+		
+	/*
+	d3.select("body").append("svg")
+		.attr("width", width)
+		.attr("height", height)
+		.selectAll("circle")
+		.data(filtered)
+		.enter().append("circle")
+		.attr("class", function(d,i) {return "line-square line-" +i +""})
+		.attr("cx", function(d, i) {
+			return (i+1) * 90;
+		})
+		.attr("cy", 160)
+		.attr("r", function(d, i){
+			if (d.statusN == 0) {return 20}
+			else if (d.statusN == 1) {return 40}
+			else {return 60};
+		})
+	*/
+}
+
+function ready() {
+  d3.csv("line_stations.csv", lineNames);
+  d3.csv("collated_status_20140725.csv", drawCircles);
+}
+// d3.csv("data/collated_status_20140725.csv", function(data){
+//         console.log( data.filter(function(d){ return d.lineID == 4;}))
+//         });
+
+$(document).ready(ready);
+
+
+
+</script>
+
+<style>
+$font-family-sans-serif: 'Bariol', sans-serif;
+
+// Base
+$border-radius-base: 0;
+$body-bg: #f5f5f5;
+$text-color: #565a5c;
+
+// Panels
+$panel-bg: #fff;
+
+$mb-orange: #f49724;
+$fb-blue: #3b5998;
+
+$font-family-price: 'Georgia', serif;
+
+@font-face {
+  font-family: 'Bariol';
+  src: asset-url('bariol_regular-webfont.eot');
+  src: asset-url('bariol_regular-webfont.eot?#iefix') format('embedded-opentype'),
+       asset-url('bariol_regular-webfont.woff') format('woff'),
+       asset-url('bariol_regular-webfont.ttf') format('truetype'),
+       asset-url('bariol_regular-webfont.svg#bariol_regularregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+h1 {
+  font-size: 12px;
+}
+
+.line-square {
+  float:left;
+  width:15px;
+  height:15px;
+  margin-right:8px;
+  margin-top:2px;
+  background:#222222;
+  border-radius: 8px;
+  border-width: 2px;
+  border-color:#222222;
+  border-style: solid
+}
+
+.line-row {
+  padding: 5.5px;
+}
+
+line-0 {
+  fill:#e25b83;
+  background:#e25b83;
+  border-color:#e25b83;
+}
+.line-1 {
+  fill:#ec7735;
+  background:#ec7735;
+  border-color:#ec7735;
+}
+.line-2 {
+	fill:#70c49b;
+  background:#70c49b;
+  border-color:#70c49b;
+}
+.line-3 {
+fill:#f6c14f;
+  background:#f6c14f;
+  border-color:#f6c14f;
+}
+.line-4 {
+fill:#8d5641;
+  background:#8d5641;
+  border-color:#8d5641;
+}
+.line-5 {
+fill:#2e91cb;
+  background:#2e91cb;
+  border-color:#2e91cb;
+}
+.line-6 {
+fill:#53c4c8;
+  background:#53c4c8;
+  border-color:#53c4c8;
+}
+.line-7 {
+fill:#b193c0;
+  background:#b193c0;
+  border-color:#b193c0;
+}
+.line-8 {
+fill:#c6c6c0;
+  background:#c6c6c0;
+  border-color:#c6c6c0;
+}
+
+
+.line-9 {
+	fill:#f6c14f;
+  background:#f6c14f;
+  border-color:#f6c14f;
+}
+.line-10 {
+fill:#8d5641;
+  background:#8d5641;
+  border-color:#8d5641;
+}
+.line-11 {
+fill:#2e91cb;
+  background:#2e91cb;
+  border-color:#2e91cb;
+}
+.line-12 {
+fill:#53c4c8;
+  background:#53c4c8;
+  border-color:#53c4c8;
+}
+.line-13 {
+fill:#b193c0;
+  background:#b193c0;
+  border-color:#b193c0;
+}
+.line-14 {
+fill:#c6c6c0;
+  background:#c6c6c0;
+  border-color:#c6c6c0;
+}
+
+.line-15 {
+fill:#2e91cb;
+  background:#2e91cb;
+  border-color:#2e91cb;
+}
+.line-16 {
+fill:#53c4c8;
+  background:#53c4c8;
+  border-color:#53c4c8;
+}
+.line-17 {
+fill:#b193c0;
+  background:#b193c0;
+  border-color:#b193c0;
+}
+.line-18 {
+fill:#c6c6c0;
+  background:#c6c6c0;
+  border-color:#c6c6c0;
+}
+</style>
+
+</head>
+<body>
+  <div class= "container">
+  <h1>Manilia Traffic</h1>
+  <div class="row">
+    <div class="col-md-9">
+      <div class="chart"></div>
+      <svg></svg>
+    </div>
+    <div class="col-md-3">
+      <div class="c-panel-label">
+        Filter
+      </div>
+      <div class="c-panel-sub-label">
+        Click to hide/show line
+      </div>
+    <div class="c-panel-body">
+      <div class= "line-names" id="line-names"></div>
+    </div>
+  </div>
+</div>
+</body>
+
+</html>

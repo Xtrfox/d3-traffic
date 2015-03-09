@@ -2,6 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.chart {
+  margin-top: -100px;
+}
+
+
+
+
 .line-square {
   float:left;
   width:15px;
@@ -19,13 +26,17 @@
   padding: 5.5px;
 }
 
-line-0 {
+.line-0 {
   fill:#e25b83;
+  // stroke: #e25b83;
+  // stroke-width: 2;
   background:#e25b83;
   border-color:#e25b83;
 }
 .line-1 {
   fill:#ec7735;
+  // stroke: green;
+  // stroke-width: 2;
   background:#ec7735;
   border-color:#ec7735;
 }

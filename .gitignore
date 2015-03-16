@@ -14,3 +14,7 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+tmp/cache/assets/development/sprockets/11242ff551e18445f13633367b55a693
+
+tmp/cache/assets/development/sprockets/11242ff551e18445f13633367b55a693

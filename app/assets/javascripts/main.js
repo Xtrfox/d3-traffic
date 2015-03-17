@@ -78,8 +78,8 @@ d3.csv("assets/traffic/collated_status_20140725.csv", function(data){
 links = [];
 
 margin = 10,
-  width = 6000,
-  height = 550;
+  width = 950,
+  height = 800;
 
 minute = "";
 trunc = "0";
@@ -161,8 +161,8 @@ force.charge(-30)
 link = svg.selectAll('.link')
   .data(links)
   .enter().append('line')
-.attr("stroke", "black")
-.attr("stroke-width", 2);
+.attr("stroke", "#A7AAAE")
+.attr("stroke-width", 2.5);
 
 
 node = svg.selectAll('.node')
@@ -194,30 +194,67 @@ force.start();
 
 
 }
-
 function drawSlider(data){
   d3.select('#slider').call(d3.slider().axis(
   d3.svg.axis().orient("top").ticks(23)
   .tickFormat(function(d){ return d + ":00"}))
 .min(0).max(23)
 .step(0.25).value(0.50).on("slide", function(evt, value) {
+  var qtr;
+  var minute;
+  var hour;
   d3.select('#slider7text').text(function(d,i) {
-    if (value - Math.floor(value) == 0.25){ minute = "15"; qtr = 1;}
-    else if (value - Math.floor(value) == 0.50){ minute = "30"; qtr = 2;}
-    else if (value - Math.floor(value) == 0.75){ minute = "45"; qtr = 3;}
-    else { minute = "00"; qtr = 4;}
+    if (value - Math.floor(value) == 0.25){
+      minute = "15";
+      qtr = 1;
+      hour = value - 0.25;
+    }
+    else if (value - Math.floor(value) == 0.50){
+      minute = "30";
+      qtr = 2;
+      hour = value - 0.50;
+    }
+    else if (value - Math.floor(value) == 0.75){ minute = "45"; qtr = 3; hour = value - 0.75;}
+    else { minute = "00"; qtr = 4; hour = value;}
     return Math.floor(value) + ":" + minute;
   });
   var filters = data.filter(function(d) {
-    if (value >= 10)
-      return (d.lineID == parseInt(this_lineID) && d.hour == value && d.qtr == qtr);
-    else
-      return (d.lineID == parseInt(this_lineID) && d.hour == (trunc+value) && d.qtr == qtr )
+    if (value >= 10){
+      var temp;
+      if (qtr == 4){
+        temp = hour - 1;
+      }
+      else	temp = hour;
+      return (d.lineID == parseInt(this_lineID) && d.hour == temp && d.qtr == qtr);
+    }
+    else{
+      var temp;
+      if (qtr == 4){
+        temp = hour - 1;
+      }
+      else	temp = hour;
+      return (d.lineID == parseInt(this_lineID) && d.hour == (trunc+hour) && d.qtr == qtr )
+    }
+
   });
 
 
   // transition here by editing radius of nodes
   // select all nodes? then edit radius
+  nb = [];
+  console.log(filters);
+
+  for (var i = 0; i < filters.length; i++){
+    if (filters[i].statusN == 0){ nb[i] = 20}
+    else if (filters[i].statusN == 1){ nb[i] = 30}
+    else {nb[i] = 41};
+  }
+
+  d3.selectAll("circle").transition().duration(700)
+  .attr("r", function(d, i){
+    return nb[i];
+  });
+
 
 }));
 }
@@ -225,6 +262,7 @@ function drawSlider(data){
 
 function ready() {
 d3.csv("assets/line_names.csv", get_lines);
+drawCircles();
 d3.csv("assets/traffic/collated_status_20140725.csv", drawSlider);
 }
 // d3.csv("data/collated_status_20140725.csv", function(data){

@@ -162,6 +162,7 @@ link = svg.selectAll('.link')
   .data(links)
   .enter().append('line')
 .attr("stroke", "#A7AAAE")
+.style("stroke-dasharray", ("3, 3"))
 .attr("stroke-width", 2.5);
 
 

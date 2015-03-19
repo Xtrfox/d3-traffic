@@ -84,3 +84,5 @@ tmp/cache/assets/production/sprockets/f7cbd26ba1d28d48de824f0e94586655
 tmp/cache/assets/development/sprockets/11242ff551e18445f13633367b55a693
 
 tmp/cache/assets/development/sprockets/13fe41fee1fe35b49d145bcc06610705
+
+log/development.log

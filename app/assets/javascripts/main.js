@@ -11,9 +11,13 @@ var margin,
 var force;
 var node;
 var link;
-var minute;
 var trunc;
+var nb;
+var svg;
 var qtr;
+var tempo;
+var value;
+var slider;
 
 function get_lines(data){
   lines = data;
@@ -44,9 +48,6 @@ function change(){
 function lineNames() {
   d3.csv("assets/line_stations.csv", function(data){
     this_lineID = menu.property("value");
-    console.log(this_lineID);
-    console.log(this_lineID.toString());
-    console.log(parseInt(this_lineID));
     this_line = data.filter(function(d){return d.lineID == this_lineID});
     var lineLabels = d3.select("#line-names");
 
@@ -73,23 +74,40 @@ function lineNames() {
 
 
 function drawCircles(){
-d3.csv("assets/traffic/collated_status_20140725.csv", function(data){
+d3.csv("assets/traffic/january2015.csv", function(data){
   nodes = [];
 links = [];
 
 margin = 10,
   width = 950,
-  height = 800;
+  height = 1000;
 
 minute = "";
 trunc = "0";
-qtr = 0;
 
 var filtered = data.filter(function(d) {
-    return (d.lineID == parseInt(menu.property("value")) && d.hour == 00 && d.qtr == 2);
+    return (d.lineID == parseInt(this_lineID) && d.hour == 00 && d.qtr == 2);
 });
 
-  var temp = filtered.length;
+
+var nn = [];
+var f;
+for (var ii = 0; ii < filtered.length / 31; ii++){
+  var temps = 0;
+  var filters2 = filtered.filter(function(d){
+      return (parseInt(d.stationID) == ii)
+  })
+  for (var k = 0; k < filters2.length; k++){
+    temps += parseInt(filters2[k].statusN);
+  }
+  var t = Math.abs((temps / 31) * 10);
+  if (t >= 0.0 && t < 4.66)	nn[ii] = 20;
+  else if (t >= 4.66 && t < 8.22)	nn[ii] = 30;
+  else	nn[ii] = 41;
+}
+
+
+  var temp = nn.length;
   var count = 0;
   while (temp != 0){
     temp = Math.floor(temp / 2);
@@ -101,17 +119,17 @@ var filtered = data.filter(function(d) {
   var cy = 160;
   var tempi = 0;
 
-for (var i = 0; i < filtered.length; i++){
+for (var i = 0; i < nn.length; i++){
   if (right == true){
     if (tempi < count){
       cx = cx + 150;
-      nodes.push({"station": filtered[i]['stationID'], "size": filtered[i]['statusN'], "cx": cx, "cy": cy});
+      nodes.push({"station": filtered[i]['stationID'], "size": nn[i], "cx": cx, "cy": cy});
       tempi++;
     }
     else{
       if (tempi == count){
-        cy = cy + 100;
-        nodes.push({"station": filtered[i]['stationID'], "size": filtered[i]['statusN'], "cx": cx, "cy": cy});
+        cy = cy + 130;
+        nodes.push({"station": filtered[i]['stationID'], "size": nn[i], "cx": cx, "cy": cy});
         right = false;
         tempi = 1;
       }
@@ -121,13 +139,13 @@ for (var i = 0; i < filtered.length; i++){
   else{
     if (tempi < count){
       cx = cx - 150;
-      nodes.push({"station": filtered[i]['stationID'], "size": filtered[i]['statusN'], "cx": cx, "cy": cy});
+      nodes.push({"station": filtered[i]['stationID'], "size": nn[i], "cx": cx, "cy": cy});
       tempi++;
     }
     else{
       if (tempi == count){
-        cy = cy + 100;
-        nodes.push({"station": filtered[i]['stationID'], "size": filtered[i]['statusN'], "cx": cx, "cy": cy});
+        cy = cy + 130;
+        nodes.push({"station": filtered[i]['stationID'], "size": nn[i], "cx": cx, "cy": cy});
         right = true;
         tempi = 1;
       }
@@ -141,7 +159,7 @@ for (var j = 0; j < nodes.length - 1; j++){
 }
 
 
-var svg = d3.select('#chart').append('svg')
+svg = d3.select('#chart').append('svg')
   .attr("width", width)
   .attr("height", height);
 
@@ -161,9 +179,9 @@ force.charge(-30)
 link = svg.selectAll('.link')
   .data(links)
   .enter().append('line')
-.attr("stroke", "#A7AAAE")
-.style("stroke-dasharray", ("3, 3"))
-.attr("stroke-width", 2.5);
+  .attr("stroke", "#A7AAAE")
+  .style("stroke-dasharray", ("3, 3"))
+  .attr("stroke-width", 2.5);
 
 
 node = svg.selectAll('.node')
@@ -173,9 +191,7 @@ node = svg.selectAll('.node')
 
 force.on('tick', function() {
   node.attr("r", function(d, i){
-    if (d.size == 0) {return 20}
-    else if (d.size == 1) {return 40}
-    else {return 60};
+    return nn[i];
   })
       .attr("cx", function(d) {
     return d.cx;
@@ -195,13 +211,17 @@ force.start();
 
 
 }
+
 function drawSlider(data){
-  d3.select('#slider').call(d3.slider().axis(
+  slider = d3.slider().axis(
   d3.svg.axis().orient("top").ticks(23)
   .tickFormat(function(d){ return d + ":00"}))
-.min(0).max(23)
-.step(0.25).value(0.50).on("slide", function(evt, value) {
-  var qtr;
+  .min(0).max(23)
+.step(0.25).value(0.50);
+
+  d3.select('#slider').call(slider.on("slide", function(evt, value) {
+  //var qtr;
+  this.value = value;
   var minute;
   var hour;
   d3.select('#slider7text').text(function(d,i) {
@@ -221,35 +241,47 @@ function drawSlider(data){
   });
   var filters = data.filter(function(d) {
     if (value >= 10){
-      var temp;
+      //var temp;
       if (qtr == 4){
-        temp = hour - 1;
+        tempo = hour - 1;
       }
-      else	temp = hour;
-      return (d.lineID == parseInt(this_lineID) && d.hour == temp && d.qtr == qtr);
+      else	tempo = hour;
+      return (d.lineID == parseInt(this_lineID) && d.hour == tempo && d.qtr == qtr);
     }
     else{
-      var temp;
+      //var temp;
       if (qtr == 4){
-        temp = hour - 1;
+        tempo = hour - 1;
       }
-      else	temp = hour;
-      return (d.lineID == parseInt(this_lineID) && d.hour == (trunc+hour) && d.qtr == qtr )
+      else	tempo = trunc+hour;
+      return (d.lineID == parseInt(this_lineID) && d.hour == (tempo) && d.qtr == qtr )
     }
 
   });
 
+  //var station_length = filters.length / 31;
+  nb = [];
+
+  for (var ii = 0; ii < filters.length / 31; ii++){
+    var sum = 0;
+    var filters2 = filters.filter(function(d){
+      return (parseInt(d.stationID) == ii)
+    })
+    for (var k = 0; k < filters2.length; k++){
+      sum += parseInt(filters2[k].statusN);
+    }
+    var t = Math.abs((sum / 31) * 10);
+    if (t >= 0.0 && t < 4.66)	nb[ii] = 20;
+    else if (t >= 4.66 && t < 8.22)	nb[ii] = 30;
+    else	nb[ii] = 41;
+  }
 
   // transition here by editing radius of nodes
   // select all nodes? then edit radius
-  nb = [];
-  console.log(filters);
 
-  for (var i = 0; i < filters.length; i++){
-    if (filters[i].statusN == 0){ nb[i] = 20}
-    else if (filters[i].statusN == 1){ nb[i] = 30}
-    else {nb[i] = 41};
-  }
+  //if (filters[i].statusN == 0){ nb[i] = 20}
+  //else if (filters[i].statusN == 1){ nb[i] = 30}
+  //else {nb[i] = 41};
 
   d3.selectAll("circle").transition().duration(700)
   .attr("r", function(d, i){
@@ -264,7 +296,7 @@ function drawSlider(data){
 function ready() {
 d3.csv("assets/line_names.csv", get_lines);
 drawCircles();
-d3.csv("assets/traffic/collated_status_20140725.csv", drawSlider);
+d3.csv("assets/traffic/january2015.csv", drawSlider);
 }
 // d3.csv("data/collated_status_20140725.csv", function(data){
 //         console.log( data.filter(function(d){ return d.lineID == 4;}))

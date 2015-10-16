@@ -1,0 +1,531 @@
+/* line 5, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.chart {
+  margin-top: -80px;
+  margin-left: -100px;
+}
+
+/* line 18, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.line-square {
+  float: left;
+  width: 15px;
+  height: 15px;
+  margin-right: 8px;
+  margin-top: 2px;
+  background: #222222;
+  border-radius: 8px;
+  border-width: 2px;
+  border-color: #222222;
+  border-style: solid;
+}
+
+/* line 31, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.line-row {
+  padding: 5.5px;
+}
+
+/* line 35, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.line-0 {
+  fill: #e25b83;
+  stroke: #3B0D7E;
+  background: #e25b83;
+  border-color: #e25b83;
+}
+
+/* line 42, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.line-1 {
+  fill: #ec7735;
+  stroke: #3B0D7E;
+  background: #ec7735;
+  border-color: #ec7735;
+}
+
+/* line 49, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.line-2 {
+  stroke: #cf692f;
+  fill: #70c49b;
+  background: #70c49b;
+  border-color: #70c49b;
+}
+
+/* line 56, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.line-3 {
+  stroke: #cf692f;
+  stroke-width: #579c7b;
+  fill: #f6c14f;
+  background: #f6c14f;
+  border-color: #f6c14f;
+}
+
+/* line 63, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.line-4 {
+  stroke: #3B0D7E;
+  fill: #8d5641;
+  background: #8d5641;
+  border-color: #8d5641;
+}
+
+/* line 69, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.line-5 {
+  stroke: #3B0D7E;
+  fill: #2e91cb;
+  background: #2e91cb;
+  border-color: #2e91cb;
+}
+
+/* line 75, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.line-6 {
+  stroke: #cf692f;
+  fill: #53c4c8;
+  background: #53c4c8;
+  border-color: #53c4c8;
+}
+
+/* line 81, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.line-7 {
+  stroke: #cf692f;
+  fill: #b193c0;
+  background: #b193c0;
+  border-color: #b193c0;
+}
+
+/* line 87, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.line-8 {
+  stroke: #3B0D7E;
+  fill: #c6c6c0;
+  background: #c6c6c0;
+  border-color: #c6c6c0;
+}
+
+/* line 93, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.line-9 {
+  stroke: #3B0D7E;
+  fill: #F1C40F;
+  background: #f6c14f;
+  border-color: #f6c14f;
+}
+
+/* line 99, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.line-10 {
+  stroke: #cf692f;
+  fill: #E67E22;
+  background: #E67E22;
+  border-color: #E67E22;
+}
+
+/* line 105, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.line-11 {
+  stroke: #cf692f;
+  fill: #E74C3C;
+  background: #E74C3C;
+  border-color: #E74C3C;
+}
+
+/* line 111, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.line-12 {
+  stroke: #3B0D7E;
+  fill: #ECF0F1;
+  background: #ECF0F1;
+  border-color: #ECF0F1;
+}
+
+/* line 117, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.line-13 {
+  stroke: #3B0D7E;
+  fill: #95A5A6;
+  background: #95A5A6;
+  border-color: #95A5A6;
+}
+
+/* line 123, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.line-14 {
+  stroke: #cf692f;
+  fill: #F39C12;
+  background: #F39C12;
+  border-color: #F39C12;
+}
+
+/* line 130, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.line-15 {
+  stroke: #cf692f;
+  fill: #D35400;
+  background: #D35400;
+  border-color: #D35400;
+}
+
+/* line 136, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.line-16 {
+  stroke: #3B0D7E;
+  fill: #C0392B;
+  background: #C0392B;
+  border-color: #C0392B;
+}
+
+/* line 142, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.line-17 {
+  stroke: #3B0D7E;
+  fill: #BDC3C7;
+  background: #BDC3C7;
+  border-color: #BDC3C7;
+}
+
+/* line 148, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.line-18 {
+  stroke: #cf692f;
+  fill: #7F8C8D;
+  background: #7F8C8D;
+  border-color: #7F8C8D;
+}
+
+/* line 154, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.line-19 {
+  stroke: #cf692f;
+  fill: #1ABC9C;
+  background: #1ABC9C;
+  border-color: #1ABC9C;
+}
+
+/* line 160, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.line-20 {
+  stroke: #3B0D7E;
+  fill: #2ECC71;
+  background: #2ECC71;
+  border-color: #2ECC71;
+}
+
+/* line 166, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.line-21 {
+  stroke: #3B0D7E;
+  fill: #3498DB;
+  background: #3498DB;
+  border-color: #3498DB;
+}
+
+/* line 172, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.line-22 {
+  stroke: #cf692f;
+  fill: #9B59B6;
+  background: #9B59B6;
+  border-color: #9B59B6;
+}
+
+/* line 178, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.line-23 {
+  stroke: #cf692f;
+  fill: #D2D7D3;
+  background: #D2D7D3;
+  border-color: #D2D7D3;
+}
+
+/* line 184, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.line-24 {
+  stroke: #3B0D7E;
+  fill: #16A085;
+  background: #16A085;
+  border-color: #16A085;
+}
+
+/* line 190, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.line-25 {
+  stroke: #3B0D7E;
+  fill: #27AE60;
+  background: #27AE60;
+  border-color: #27AE60;
+}
+
+/* line 196, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.line-26 {
+  stroke: #cf692f;
+  fill: #2980B9;
+  background: #2980B9;
+  border-color: #2980B9;
+}
+
+/* line 202, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.line-27 {
+  stroke: #cf692f;
+  fill: #E67E22;
+  background: #E67E22;
+  border-color: #E67E22;
+}
+
+/* line 208, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.line-28 {
+  stroke: #3B0D7E;
+  fill: #2C3E50;
+  background: #2C3E50;
+  border-color: #2C3E50;
+}
+
+/* line 214, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.line-29 {
+  stroke: #3B0D7E;
+  fill: #EB974E;
+  background: #EB974E;
+  border-color: #EB974E;
+}
+
+/* line 220, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.line-30 {
+  stroke: #cf692f;
+  fill: #C8F7C5;
+  background: #C8F7C5;
+  border-color: #C8F7C5;
+}
+
+/* line 226, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.line-31 {
+  stroke: #cf692f;
+  fill: #FDE9B9;
+  background: #FDE9B9;
+  border-color: #FDE9B9;
+}
+
+/* line 232, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.line-32 {
+  stroke: #3B0D7E;
+  fill: #1E8BC3;
+  background: #1E8BC3;
+  border-color: #1E8BC3;
+}
+
+/* line 238, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.line-33 {
+  stroke: #3B0D7E;
+  fill: #4ECDC4;
+  background: #4ECDC4;
+  border-color: #4ECDC4;
+}
+
+/* line 244, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.line-34 {
+  stroke: #cf692f;
+  fill: #DCC6E0;
+  background: #DCC6E0;
+  border-color: #DCC6E0;
+}
+
+/* line 250, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.line-35 {
+  stroke: #cf692f;
+  fill: #9A12B3;
+  background: #9A12B3;
+  border-color: #9A12B3;
+}
+
+/* line 256, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.line-36 {
+  stroke: #3B0D7E;
+  fill: #96281B;
+  background: #96281B;
+  border-color: #96281B;
+}
+
+/* line 263, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.d3-slider {
+  margin-top: 45px;
+}
+
+/* line 266, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.d3-slider-handle {
+  position: absolute;
+  width: 1.2em;
+  height: 1.2em;
+  border: 0px solid #d3d3d3;
+  border-radius: 12px!important;
+  background: #af516c!important;
+  z-index: 3;
+}
+
+/* line 275, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.d3-slider-horizontal {
+  height: .2em!important;
+  background-color: #cec6b9;
+}
+
+/* line 279, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.d3-slider-handle:hover {
+  background: #af516c!important;
+  border: 0px solid #af516c;
+}
+
+/* line 283, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+span#slider7text {
+  color: #9e2f50;
+}
+
+/* line 286, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+div#slider7 {
+  width: 562px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* line 291, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+#credits a {
+  color: #2e6e9e;
+  position: relative;
+  margin-right: 0px;
+  text-decoration: none;
+  background-color: #fff1e0;
+  padding: 0px;
+  border-radius: 0px;
+  font-size: 11px;
+  font-weight: normal;
+}
+
+/* line 302, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+div#credits {
+  position: absolute;
+  top: 730px;
+  left: 0px;
+}
+
+/* line 307, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+#credits span {
+  font-size: 11px;
+  font-weight: bold;
+}
+
+/* line 311, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+#credits span#author {
+  position: relative;
+  left: 16px;
+}
+
+/* line 315, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+#credits span#maps {
+  position: relative;
+  left: 8px;
+}
+
+/* line 319, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+#credits a:hover {
+  background-color: none;
+  color: #000;
+}
+
+/* line 323, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+#credits a.ftr:hover {
+  background-color: none;
+  color: #43423e;
+}
+
+/* line 327, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+#credits a.ftr {
+  color: #43423e;
+}
+
+/* line 331, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.drop {
+  margin-left: 5px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+/* line 348, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.col-md-6 input {
+  width: 200px;
+}
+
+/* line 352, /Users/leolofranco/d3-traffic/app/assets/stylesheets/chart.css.scss */
+.add-row-space {
+  margin-bottom: 20px;
+}
+@font-face {
+  font-family: 'Bariol';
+  src: url(/bariol_regular-webfont.eot);
+  src: url(/bariol_regular-webfont.eot?#iefix) format("embedded-opentype"), url(/bariol_regular-webfont.woff) format("woff"), url(/bariol_regular-webfont.ttf) format("truetype"), url(/bariol_regular-webfont.svg#bariol_regularregular) format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* line 26, /Users/leolofranco/traffic/app/assets/stylesheets/common.css.scss */
+h1 {
+  font-size: 12px;
+}
+.d3-slider {
+    position: relative;
+    font-family: Verdana,Arial,sans-serif;
+    font-size: 1.1em;
+    border: 1px solid #aaaaaa;
+    z-index: 2;
+}
+
+.d3-slider-horizontal {
+    height: .8em;
+}  
+
+.d3-slider-vertical {
+    width: .8em;
+    height: 100px;
+}      
+
+.d3-slider-handle {
+    position: absolute;
+    width: 1.2em;
+    height: 1.2em;
+    border: 1px solid #d3d3d3;
+    border-radius: 4px;
+    background: #eee;
+    background: linear-gradient(to bottom, #eee 0%, #ddd 100%);
+    z-index: 3;
+}
+
+.d3-slider-handle:hover {
+    border: 1px solid #999999;
+}
+
+.d3-slider-horizontal .d3-slider-handle {
+    top: -.3em;
+    margin-left: -.6em;
+}
+
+.d3-slider-axis {
+    position: relative;
+    z-index: 1;    
+}
+
+.d3-slider-axis-bottom {
+    top: .8em;
+}
+
+.d3-slider-axis-right {
+    left: .8em;
+}
+
+.d3-slider-axis path {
+    stroke-width: 0;
+    fill: none;
+}
+
+.d3-slider-axis line {
+    fill: none;
+    stroke: #aaa;
+    shape-rendering: crispEdges;
+}
+
+.d3-slider-axis text {
+    font-size: 11px;
+}
+
+.d3-slider-vertical .d3-slider-handle {
+    left: -.25em;
+    margin-left: 0;
+    margin-bottom: -.6em;      
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+
+
+
+ */
+

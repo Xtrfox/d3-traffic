@@ -3,7 +3,6 @@
 <head>
   <title>Traffic</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
@@ -15,4 +14,6 @@
 <%= yield %>
 
 </body>
+<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
 </html>

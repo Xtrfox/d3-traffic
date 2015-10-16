@@ -576,8 +576,8 @@ function radixSort(array, maxDigitSymbols) {
         alert(a);
         return a;
     }
-    
-$(window).load(function() {
+
+window.onload += function () {
 
 
   // var a=[2,1,4,7,5];
@@ -682,4 +682,4 @@ $(window).load(function() {
   });
 
 
-});
+};

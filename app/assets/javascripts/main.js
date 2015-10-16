@@ -304,7 +304,7 @@
 //
 //
 // $(document).ready(ready);
-$(document).ready(function() {
+$(window).load(function() {
 
   //bubble
   function bubbleSort(arr){
@@ -319,7 +319,6 @@ $(document).ready(function() {
           alert(arr);
        }
 
-    document.getElementById("bs").innerHTML=(arr.join(", "));
      }
      return arr;
   }
@@ -331,6 +330,7 @@ $(document).ready(function() {
     var b = a.split(',').map(Number);
     alert(b);
     bubbleSort(b);
+    document.getElementById("bs").innerHTML=(b.join(", "));
   });
 
   //selection
